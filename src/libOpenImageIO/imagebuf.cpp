@@ -278,7 +278,7 @@ ImageBuf::write (ImageOutput *out,
                  void *progress_callback_data) const
 {
     bool ok = true;
-
+    
     // If ImageOutput does not support data windows, then a new image buffer
     // should be created here that has m_spec's full_width/height and that should
     // be passed through.
@@ -290,9 +290,11 @@ ImageBuf::write (ImageOutput *out,
              m_spec.height != m_spec.full_height ||
              m_spec.depth != m_spec.full_depth)) {
         ImageBuf newBuf;
-        // Not sure which of these will work yet.
-        ImageBufAlgo::crop(newBuf, *this, 0, m_spec.full_width, 0, m_spec.full_height, ImageBufAlgo::CROP_TRANS);
-        //ImageBufAlgo::crop(newBuf, *this, -m_spec.x, m_spec.full_width - m_spec.x, -m_spec.y, m_spec.full_height - m_spec.y, ImageBufAlgo::CROP_TRANS);
+
+        ok = ImageBufAlgo::crop(newBuf, *this, 0, m_spec.full_width, 0, m_spec.full_height, ImageBufAlgo::CROP_CUT);
+        if (! ok)
+            return ok;
+        
         ok = newBuf.write(out, progress_callback, progress_callback_data);
         if (! ok)
             m_err = newBuf.geterror();
