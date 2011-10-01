@@ -291,8 +291,8 @@ ImageBuf::write (ImageOutput *out,
              m_spec.depth != m_spec.full_depth)) {
         ImageBuf newBuf;
         // Not sure which of these will work yet.
-        ImageBufAlgo::crop(newBuf, this, 0, m_spec.full_width, 0, m_spec.full_height, ImageBufAlgo::CROP_TRANS);
-        //ImageBufAlgo::crop(newBuf, this, -m_spec.x, m_spec.full_width - m_spec.x, -m_spec.y, m_spec.full_height - m_spec.y, ImageBufAlgo::CROP_TRANS);
+        ImageBufAlgo::crop(newBuf, *this, 0, m_spec.full_width, 0, m_spec.full_height, ImageBufAlgo::CROP_TRANS);
+        //ImageBufAlgo::crop(newBuf, *this, -m_spec.x, m_spec.full_width - m_spec.x, -m_spec.y, m_spec.full_height - m_spec.y, ImageBufAlgo::CROP_TRANS);
         ok = newBuf.write(out, progress_callback, progress_callback_data);
         if (! ok)
             m_err = newBuf.geterror();
