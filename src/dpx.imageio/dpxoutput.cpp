@@ -137,7 +137,8 @@ DPXOutput::open (const std::string &name, const ImageSpec &userspec,
 
     m_spec = userspec;  // Stash the spec
     
-    // DPXs don't support data windows, so set width/height to full_width/full_height
+    // As DPXs don't support data windows, we need to set the data window to the
+    // same as the display window
     m_spec.width = m_spec.full_width;
     m_spec.height = m_spec.full_height;
     m_spec.depth = m_spec.full_depth;
