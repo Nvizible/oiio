@@ -89,6 +89,15 @@ Jpeg2000Output::open (const std::string &name, const ImageSpec &spec,
     m_spec = spec;
     m_filename = name;
 
+    // As Jpeg 2000 files don't support data windows, we need to set the
+    // data window to the same as the display window
+    m_spec.width = m_spec.full_width;
+    m_spec.height = m_spec.full_height;
+    m_spec.depth = m_spec.full_depth;
+    m_spec.x = m_spec.full_x;
+    m_spec.y = m_spec.full_y;
+    m_spec.z = m_spec.full_z;
+
     // check for things that this format doesn't support
     if (m_spec.width < 1 || m_spec.height < 1) {
         error ("Image resolution must be at least 1x1, you asked for %d x %d",

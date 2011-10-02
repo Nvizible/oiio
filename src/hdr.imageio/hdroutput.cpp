@@ -83,6 +83,15 @@ HdrOutput::open (const std::string &name, const ImageSpec &newspec,
     // Save spec for later use
     m_spec = newspec;
 
+    // As HDR files don't support data windows, we need to set the
+    // data window to the same as the display window
+    m_spec.width = m_spec.full_width;
+    m_spec.height = m_spec.full_height;
+    m_spec.depth = m_spec.full_depth;
+    m_spec.x = m_spec.full_x;
+    m_spec.y = m_spec.full_y;
+    m_spec.z = m_spec.full_z;
+
     // Check for things HDR can't support
     if (m_spec.nchannels != 3) {
         error ("HDR can only support 3-channel images");

@@ -187,5 +187,14 @@ SocketOutput::connect_to_server (const std::string &name)
     return true;
 }
 
+bool
+SocketOutput::supports (const std::string &feature) const
+{
+    if (feature == "datawindow")
+        return true;
+    
+    return false;
+}
+
 OIIO_PLUGIN_NAMESPACE_END
 
