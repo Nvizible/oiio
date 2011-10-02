@@ -128,6 +128,15 @@ TGAOutput::open (const std::string &name, const ImageSpec &userspec,
     close ();  // Close any already-opened file
     m_spec = userspec;  // Stash the spec
 
+    // As TGA files don't support data windows, we need to set the
+    // data window to the same as the display window
+    m_spec.width = m_spec.full_width;
+    m_spec.height = m_spec.full_height;
+    m_spec.depth = m_spec.full_depth;
+    m_spec.x = m_spec.full_x;
+    m_spec.y = m_spec.full_y;
+    m_spec.z = m_spec.full_z;
+
     m_file = fopen (name.c_str(), "wb");
     if (! m_file) {
         error ("Could not open file \"%s\"", name.c_str());

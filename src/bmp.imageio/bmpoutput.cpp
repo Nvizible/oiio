@@ -65,6 +65,15 @@ BmpOutput::open (const std::string &name, const ImageSpec &spec,
     m_filename = name;
     m_spec = spec;
 
+    // As BMP files don't support data windows, we need to set the
+    // data window to the same as the display window
+    m_spec.width = m_spec.full_width;
+    m_spec.height = m_spec.full_height;
+    m_spec.depth = m_spec.full_depth;
+    m_spec.x = m_spec.full_x;
+    m_spec.y = m_spec.full_y;
+    m_spec.z = m_spec.full_z;
+
     // TODO: Figure out what to do with nchannels.
 
     m_fd = fopen (m_filename.c_str (), "wb");

@@ -147,6 +147,15 @@ ICOOutput::open (const std::string &name, const ImageSpec &userspec,
     close ();  // Close any already-opened file
     m_spec = userspec;  // Stash the spec
 
+    // As ICO files don't support data windows, we need to set the
+    // data window to the same as the display window
+    m_spec.width = m_spec.full_width;
+    m_spec.height = m_spec.full_height;
+    m_spec.depth = m_spec.full_depth;
+    m_spec.x = m_spec.full_x;
+    m_spec.y = m_spec.full_y;
+    m_spec.z = m_spec.full_z;
+
     // Check for things this format doesn't support
     if (m_spec.width < 1 || m_spec.height < 1) {
         error ("Image resolution must be at least 1x1, you asked for %d x %d",
