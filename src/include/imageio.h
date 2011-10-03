@@ -772,6 +772,8 @@ public:
     ///                       indicate that the entire data block is zero?
     ///    "channelformats" Does the plugin/format support per-channel
     ///                       data formats?
+    ///    "datawindow"     Does the plugin/format support data windows that
+    ///                       differ from their display window?
     ///
     /// Note that main advantage of this approach, versus having
     /// separate individual supports_foo() methods, is that this allows
