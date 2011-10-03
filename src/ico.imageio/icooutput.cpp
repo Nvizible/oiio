@@ -145,7 +145,7 @@ ICOOutput::open (const std::string &name, const ImageSpec &userspec,
     }
 
     close ();  // Close any already-opened file
-    m_spec = userspec;  // Stash the spec
+    stash_spec(userspec);
 
     // Check for things this format doesn't support
     if (m_spec.width < 1 || m_spec.height < 1) {
@@ -199,7 +199,7 @@ ICOOutput::open (const std::string &name, const ImageSpec &userspec,
                     + (4 - ((m_spec.width + 7) / 8) % 4) % 4; // padding
 
         // Force 8 bit integers
-        if (m_spec.format != TypeDesc::UINT16)
+        if (m_spec.format != TypeDesc::UINT8)
             m_spec.set_format (TypeDesc::UINT8);
     }
 
