@@ -75,15 +75,6 @@ Jpeg2000Output::component_struct_init (jas_image_cmptparm_t *cmpt) {
 }
 
 
-bool
-Jpeg2000Output::supports_data_format (const std::string &format) const
-{
-    if (format == "uint8")
-        return true;
-
-    return false;
-}
-
 
 bool
 Jpeg2000Output::open (const std::string &name, const ImageSpec &spec,
@@ -95,7 +86,7 @@ Jpeg2000Output::open (const std::string &name, const ImageSpec &spec,
     }
 
     // saving 'name' and 'spec' for later use
-    stash_spec(spec);
+    m_spec = spec;
     m_filename = name;
 
     // check for things that this format doesn't support

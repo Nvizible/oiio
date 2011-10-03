@@ -51,16 +51,6 @@ OIIO_PLUGIN_EXPORTS_BEGIN
 OIIO_PLUGIN_EXPORTS_END
 
 
-bool
-BmpOutput::supports_data_format (const std::string &format) const
-{
-    if (format == "uint8")
-        return true;
-
-    return false;
-}
-
-
 
 bool
 BmpOutput::open (const std::string &name, const ImageSpec &spec,
@@ -73,7 +63,7 @@ BmpOutput::open (const std::string &name, const ImageSpec &spec,
 
     // saving 'name' and 'spec' for later use
     m_filename = name;
-    stash_spec(spec);
+    m_spec = spec;
 
     // TODO: Figure out what to do with nchannels.
 

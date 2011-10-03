@@ -51,7 +51,6 @@ public:
         // Support nothing nonstandard
         return false;
     }
-    virtual bool supports_data_format (const std::string &format) const;
     virtual bool open (const std::string &name, const ImageSpec &spec,
                        OpenMode mode);
     virtual bool close ();
@@ -100,11 +99,6 @@ DDSOutput::~DDSOutput ()
     close ();
 }
 
-bool
-DDSOutput::supports_data_format (const std::string &format) const
-{
-    return false;
-}
 
 
 bool
@@ -117,7 +111,7 @@ DDSOutput::open (const std::string &name, const ImageSpec &userspec,
     }
 
     close ();  // Close any already-opened file
-    stash_spec(userspec);
+    m_spec = userspec;  // Stash the spec
 
     m_file = fopen (name.c_str(), "wb");
     if (! m_file) {
